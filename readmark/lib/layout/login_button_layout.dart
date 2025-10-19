@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginButtonLayout extends StatelessWidget {
-  final acting;
+  final String acting;
   final VoidCallback onPressed;
 
   const LoginButtonLayout({
@@ -24,7 +24,7 @@ class LoginButtonLayout extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            backgroundColor: Color(0xFFF9B4B4),
+            backgroundColor: Color(0xFFFF6969),
             foregroundColor: Colors.white,
             textStyle: TextStyle(fontSize: 17),
           ),

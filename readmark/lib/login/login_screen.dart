@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:readmark/layout/login_button_layout.dart';
 import 'package:readmark/layout/login_layout.dart';
 import 'package:readmark/layout/text_button_layout.dart';
+import 'package:readmark/login/login_first_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -36,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return LoginLayout();
+          return LoginFirstScreen();
         },
       ),
     );
@@ -70,7 +71,7 @@ class InfoText extends StatelessWidget {
           ],
         ),
         SizedBox(height: 4),
-        LoginButtonLayout(acting: "로그인하기", onPressed: onPressed),
+        LoginButtonLayout(acting: "로그인", onPressed: onPressed),
       ],
     );
   }

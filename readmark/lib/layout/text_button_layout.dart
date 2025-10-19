@@ -19,3 +19,19 @@ class TextButtonLayout extends StatelessWidget {
     );
   }
 }
+
+class ImgButtonLayout extends StatelessWidget {
+  const ImgButtonLayout({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        child: Image.asset('assets/img/backarrow.png'),
+      ),
+    );
+  }
+}
