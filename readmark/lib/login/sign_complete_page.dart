@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:readmark/component/next_button_layout.dart';
+
+class SignCompletePage extends StatelessWidget {
+  const SignCompletePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(bottomSheet: NextNottomButton(), body: InfoText());
+  }
+}
+
+class NextNottomButton extends StatelessWidget {
+  const NextNottomButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 52),
+      child: NextButtonLayout(onPressed: () {}, acting: "로그인하러 가기"),
+    );
+  }
+}
+
+class InfoText extends StatelessWidget {
+  const InfoText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: 20, top: 161),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            "완료!",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+          ),
+          Text(
+            "계정 가입을 완료하였어요!\n지금 readmark에 로그인하고 사용해보세요.",
+            style: TextStyle(fontSize: 18, color: Color(0xFF9A9A9A)),
+          ),
+        ],
+      ),
+    );
+  }
+}

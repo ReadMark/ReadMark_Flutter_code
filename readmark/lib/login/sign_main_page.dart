@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readmark/component/next_button_layout.dart';
+import 'package:readmark/login/sign_complete_page.dart';
 
 final List<String> titles = [
   "이름을 입력해주세요.",
@@ -10,14 +11,14 @@ final List<String> titles = [
 
 final List<String> hints = ["성명 입력", "이메일 입력", "아이디 입력", "비밀번호 입력"];
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignMainPage extends StatefulWidget {
+  const SignMainPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignMainPage> createState() => _SignMainPage();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignMainPage extends State<SignMainPage> {
   int _currentPage = 0;
 
   @override
@@ -41,7 +42,13 @@ class _LoginPageState extends State<LoginPage> {
       if (_currentPage < titles.length - 1) {
         _currentPage++;
       } else {
-        _currentPage = 0;
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) {
+              return SignCompletePage();
+            },
+          ),
+        );
       }
     });
   }
