@@ -3,10 +3,16 @@ import 'package:flutter/rendering.dart';
 import 'package:readmark/component/next_button_layout.dart';
 import 'package:readmark/component/text_input_field.dart';
 import 'package:readmark/login/sign_main_page.dart';
+import 'package:readmark/main_page/home_screen.dart';
 
-class LoginMainPage extends StatelessWidget {
+class LoginMainPage extends StatefulWidget {
   const LoginMainPage({super.key});
 
+  @override
+  State<LoginMainPage> createState() => _LoginMainPageState();
+}
+
+class _LoginMainPageState extends State<LoginMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,10 +24,30 @@ class LoginMainPage extends StatelessWidget {
           UsetInfoInput(act: "비밀번호", action: "비밀번호를 입려해주세요.", src: true),
 
           Spacer(flex: 1),
-          SecondInfoText(onPressed: () {}),
-          NextButtonLayout(onPressed: () {}, acting: "로그인"),
+          SecondInfoText(onPressed: goToSignPage),
+          NextButtonLayout(onPressed: goToHomeScreen, acting: "로그인"),
           SizedBox(height: 52),
         ],
+      ),
+    );
+  }
+
+  goToSignPage() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return SignMainPage();
+        },
+      ),
+    );
+  }
+
+  goToHomeScreen() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return HomeScreen();
+        },
       ),
     );
   }
