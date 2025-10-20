@@ -1,23 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:readmark/component/next_button_layout.dart';
+import 'package:readmark/login/login_main_page.dart';
 
-class SignCompletePage extends StatelessWidget {
+class SignCompletePage extends StatefulWidget {
   const SignCompletePage({super.key});
 
   @override
+  State<SignCompletePage> createState() => _SignCompletePageState();
+}
+
+class _SignCompletePageState extends State<SignCompletePage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(bottomSheet: NextNottomButton(), body: InfoText());
+    return Scaffold(
+      bottomSheet: NextNottomButton(onPressed: nextPage),
+      body: InfoText(),
+    );
+  }
+
+  nextPage() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return LoginMainPage();
+        },
+      ),
+    );
   }
 }
 
 class NextNottomButton extends StatelessWidget {
-  const NextNottomButton({super.key});
+  final VoidCallback onPressed;
+
+  const NextNottomButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 52),
-      child: NextButtonLayout(onPressed: () {}, acting: "로그인하러 가기"),
+      child: NextButtonLayout(onPressed: onPressed, acting: "로그인하러 가기"),
     );
   }
 }

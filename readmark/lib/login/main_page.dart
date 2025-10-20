@@ -23,7 +23,7 @@ class _LoginMainPageState extends State<MainPage> {
             Image.asset("assets/img/readmark.png"),
 
             Spacer(flex: 1),
-            infoText(onPressed: signStart),
+            InfoText(onPressed: signStart),
             nextButton(onPressed: loginStart),
             SizedBox(height: 52),
           ],
@@ -53,10 +53,10 @@ class _LoginMainPageState extends State<MainPage> {
   }
 }
 
-class infoText extends StatelessWidget {
+class InfoText extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const infoText({super.key, required this.onPressed});
+  const InfoText({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
