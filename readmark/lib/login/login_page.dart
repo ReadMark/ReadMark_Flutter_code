@@ -10,23 +10,62 @@ final List<String> titles = [
 
 final List<String> hints = ["성명 입력", "이메일 입력", "아이디 입력", "비밀번호 입력"];
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: BottomButton(),
+      bottomSheet: BottomButton(onPressed: bottomButtonOnPressed),
 
       body: Column(
-        children: [SizedBox(height: 68), PopButton(), Title(), TextInputBox()],
+        children: [
+          SizedBox(height: 68),
+          PopButton(currentPage: _currentPage, onPressed: onBack),
+          HeaderTitle(currentPage: _currentPage),
+          TextInputBox(currentPage: _currentPage),
+        ],
       ),
     );
+  }
+
+  bottomButtonOnPressed() {
+    setState(() {
+      if (_currentPage < titles.length - 1) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
+    });
+  }
+
+  onBack() {
+    if (_currentPage == 0) {
+      Navigator.of(context).pop();
+    } else {
+      setState(() {
+        _currentPage--;
+      });
+    }
   }
 }
 
 class PopButton extends StatelessWidget {
-  const PopButton({super.key});
+  final int currentPage;
+  final VoidCallback onPressed;
+
+  const PopButton({
+    super.key,
+    required this.currentPage,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +75,7 @@ class PopButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
+            onTap: onPressed,
             child: Image.asset("assets/img/backarrow.png"),
           ),
         ],
@@ -47,8 +84,10 @@ class PopButton extends StatelessWidget {
   }
 }
 
-class Title extends StatelessWidget {
-  const Title({super.key});
+class HeaderTitle extends StatelessWidget {
+  final int currentPage;
+
+  const HeaderTitle({super.key, required this.currentPage});
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +97,10 @@ class Title extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            titles[1],
+            titles[currentPage],
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
           ),
-          Text("1/4", style: TextStyle(fontSize: 18)),
+          Text("${currentPage + 1}/4", style: TextStyle(fontSize: 18)),
         ],
       ),
     );
@@ -69,7 +108,9 @@ class Title extends StatelessWidget {
 }
 
 class TextInputBox extends StatelessWidget {
-  const TextInputBox({super.key});
+  final int currentPage;
+
+  const TextInputBox({super.key, required this.currentPage});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +118,7 @@ class TextInputBox extends StatelessWidget {
       padding: EdgeInsets.only(left: 20, right: 20, top: 16),
       child: TextField(
         decoration: InputDecoration(
-          hintText: hints[0],
+          hintText: hints[currentPage],
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
@@ -86,13 +127,15 @@ class TextInputBox extends StatelessWidget {
 }
 
 class BottomButton extends StatelessWidget {
-  const BottomButton({super.key});
+  final VoidCallback onPressed;
+
+  const BottomButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 52),
-      child: NextButtonLayout(onPressed: () {}, acting: "다음"),
+      child: NextButtonLayout(onPressed: onPressed, acting: "다음"),
     );
   }
 }

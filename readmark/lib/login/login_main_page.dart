@@ -22,8 +22,8 @@ class _LoginMainPageState extends State<LoginMainPage> {
             Image.asset("assets/img/readmark.png"),
 
             Spacer(flex: 1),
-            infoText(),
-            nextButton(onPressed: LoginStart),
+            infoText(onPressed: signStart),
+            nextButton(onPressed: loginStart),
             SizedBox(height: 52),
           ],
         ),
@@ -31,7 +31,17 @@ class _LoginMainPageState extends State<LoginMainPage> {
     );
   }
 
-  LoginStart() {
+  loginStart() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return LoginPage();
+        },
+      ),
+    );
+  }
+
+  signStart() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
@@ -43,7 +53,9 @@ class _LoginMainPageState extends State<LoginMainPage> {
 }
 
 class infoText extends StatelessWidget {
-  const infoText({super.key});
+  final VoidCallback onPressed;
+
+  const infoText({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +70,7 @@ class infoText extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: onPressed,
           child: Text("회원가입", style: TextStyle(fontWeight: FontWeight.w800)),
         ),
       ],
