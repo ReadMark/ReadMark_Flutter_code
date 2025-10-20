@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:readmark/component/next_button_layout.dart';
 import 'package:readmark/login/login_page.dart';
 
 class LoginMainPage extends StatefulWidget {
@@ -72,22 +73,6 @@ class nextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 20, right: 20, top: 4),
-      child: SizedBox(
-        width: double.infinity,
-        height: 52,
-        child: ElevatedButton(
-          onPressed: onPressed,
-          child: Text("로그인", style: TextStyle(color: Colors.white)),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFFFF6969),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-        ),
-      ),
-    );
+    return NextButtonLayout(onPressed: onPressed, acting: "로그인");
   }
 }
